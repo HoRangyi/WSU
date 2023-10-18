@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제목</title>
+    <link rel="stylesheet" href="style.css"> <!-- 여기서 CSS 파일을 연결합니다. -->
+</head>
+
 /* 레이아웃 틀 */
 html {
   height: 100%;
@@ -6,7 +15,7 @@ html {
 body {
   margin: 0;
   height: 100%;
-  background: #000000;
+  background: #ffffff;
   font-family: Dotum, "돋움", Helvetica, sans-serif;
 }
 #logo {
