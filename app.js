@@ -2,7 +2,7 @@ const express = require("express");
 const ejs = require("ejs");
 const app = express();
 const sprintf = require("sprintf-js").sprintf;
-
+//ㅁㅁ
 const bodyParser = require("body-parser");
 
 const maria = require("./DB/maria");
