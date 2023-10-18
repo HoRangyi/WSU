@@ -81,5 +81,5 @@ app.post("/sign_in", function (req, res) {
 });
 
 app.listen(port, () => {
-  console.log("3001 포트에 로컬로 서버가열렸어요!");
+  console.log("3123 포트에 로컬로 서버가열렸어요!");
 });
