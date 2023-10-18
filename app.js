@@ -1,32 +1,15 @@
-const express = require("express");
-const app = express();
-const sprintf = require("sprintf-js").sprintf;
-
-const bodyParser = require("body-parser");
-
-const maria = require("./DB/maria");
-const port = 3123;
+//#region 사용중인 모듈
+const express = require("express") // 웹홈페이지 모듈
+const app = express() // 모듈 별칭화
+const sprintf = require("sprintf-js").sprintf // sprintf 사용모듈
+const bodyParser = require("body-parser") // 미들웨어 모듈
+const maria = require("./DB/maria") //DB연결모듈
+const port = 3123; // 포트번호
+//#endregion
 
 //#region 파이썬 함수 호출
 const { spawn } = require("node:child_process");
-//#endregion
-
-
-app.set("view engine", "ejs")
-
-app.use(express.static("./view" + "/"))
-app.use(express.json());
-
-
-app.use(bodyParser.text());
-
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.get("/", (req, res) => {
-  res.render("");
-});
-
-app.post("/go_sign_up", function (req, res) {});
+const { title } = require("node:process");
 
 //메세지전송
 app.post("/message", function (req, res) {
@@ -35,6 +18,21 @@ app.post("/message", function (req, res) {
   ls.stdout.on("data", (data) => {
     console.log("stdout: ${data}");
   });
+});
+//#endregion
+
+//#region 미들웨어 적용(static)
+app.set("view engine", "ejs")
+app.use(express.static("./view" + "/"))
+app.use(express.json());
+
+app.use(bodyParser.text());
+app.use(bodyParser.urlencoded({ extended: true }));
+//#endregion
+
+//기본 홈페이지 랜더링
+app.get("/", (req, res) => {
+  res.render("index", {title:'express'});
 });
 
 // DB 라인
@@ -81,5 +79,5 @@ app.post("/sign_in", function (req, res) {
 });
 
 app.listen(port, () => {
-  console.log("3001 포트에 로컬로 서버가열렸어요!");
+  console.log("3123 포트에 로컬로 서버가열렸어요!");
 });
