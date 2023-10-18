@@ -1,23 +1,17 @@
 const express = require("express");
-const ejs = require("ejs");
 const app = express();
 const sprintf = require("sprintf-js").sprintf;
-//ㅁㅁ
+
 const bodyParser = require("body-parser");
 
 const maria = require("./DB/maria");
 const port = 3123;
-const userRouter = require("./user");
 
 //#region 파이썬 함수 호출
 const { spawn } = require("node:child_process");
 //#endregion
 
 app.set("view engine", "ejs");
-
-app.use(express.static("./view" + "/"));
-app.use(express.json());
-app.use("/user", userRouter);
 
 app.use(bodyParser.text());
 
