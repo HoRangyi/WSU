@@ -11,7 +11,12 @@ const port = 3123;
 const { spawn } = require("node:child_process");
 //#endregion
 
-app.set("view engine", "ejs");
+
+app.set("view engine", "ejs")
+
+app.use(express.static("./view" + "/"))
+app.use(express.json());
+
 
 app.use(bodyParser.text());
 
