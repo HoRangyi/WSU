@@ -38,15 +38,23 @@ app.get("/", (req, res) => {
 // DB 라인
 //#region 회원가입
 app.post("/sign_up", function (req, res) {
-  const u_id = req.body.user_id;
-  const u_pw = req.body.user_pw;
-  const u_name = req.body.user_name;
+  const u_id = 0 //req.body.user_id;
+  const u_pw = 0  //req.body.user_pw;
+  const u_name = 0 //req.body.user_name;
+  const u_phone = 0
+  const u_addr = 0
+  const u_aname = 0
+  const u_aphone = 0
 
   var SQL = sprintf(
-    'INSERT INTO emtest VALUES("%s", "%s", "%s");',
+    'INSERT INTO basic VALUES("%s", "%s", "%s","%s","%s","%s","%s");',
     u_id,
     u_pw,
-    u_name
+    u_name,
+    u_phone,
+    u_addr,
+    u_aname,
+    u_aphone
   );
   maria.query(SQL, function (err, rows, fields) {
     if (!err) {
