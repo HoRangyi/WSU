@@ -14,22 +14,35 @@
     </div>
     <div id="wrapper">
       <div id="content">
-        <h3 class="join_title"><label for="id">이름</label></h3>
+
+        <h3 class="join_title"><label for="id">아이디</label></h3>
         <input
           type="text"
-          id="id"
+          id="user_id"
           class="int"
-          placeholder="이름"
+          placeholder="아이디"
           maxlength="20"
+          name = "user_id"
         />
 
         <h3 class="join_title"><label for="pswd1">비밀번호</label></h3>
         <input
           type="password"
-          id="pswd1"
+          id="user_pw"
           class="int"
           placeholder="비밀번호"
           maxlength="20"
+          name="user_pw"
+        />
+
+        <h3 class="join_title"><label for="name">이름</label></h3>
+        <input
+          type="text"
+          id="user_name"
+          class="int"
+          placeholder="이름"
+          maxlength="20"
+          name = "user_name"
         />
 
         <h3 class="join_title"><label for="pswd2">비밀번호 재확인</label></h3>
@@ -44,19 +57,21 @@
         <h3 class="join_title"><label for="email">주소</label></h3>
         <input
           type="email"
-          id="email"
+          id="user_email"
           class="int"
           placeholder="상세주소까지 작성해주세요"
           maxlength="100"
+          name="user_email"
         />
 
         <h3 class="join_title"><label for="mobile">휴대전화</label></h3>
         <input
           type="tel"
-          id="mobile"
+          id="user_phone"
           class="int"
           placeholder="전화번호 입력"
           maxlength="16"
+          name="user_phone"
         />
 
         <div class="btn_area">
