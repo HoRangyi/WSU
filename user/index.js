@@ -1,5 +1,5 @@
 const express = require("express");
-const tokenService = require("C:/Users/user/Downloads/sv3/jwt");
+const tokenService = require("C:/Users/user/Downloads/sv3/WSU/jwt");
 const router = express.Router();
 
 //나중에 DB붙일예정 현재 입력된 데이터로 확인중.
