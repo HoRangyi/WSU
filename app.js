@@ -38,13 +38,13 @@ app.get("/", (req, res) => {
 // DB 라인
 //#region 회원가입
 app.post("/sign_up", function (req, res) {
-  const u_id = 0 //req.body.user_id;
-  const u_pw = 0  //req.body.user_pw;
-  const u_name = 0 //req.body.user_name;
-  const u_phone = 0
-  const u_addr = 0
-  const u_aname = 0
-  const u_aphone = 0
+  const u_id = req.body.user_id
+  const u_pw = req.body.user_pw
+  const u_name = req.body.user_name
+  const u_phone = req.body.user_phone
+  const u_addr = req.body.user_adr
+  const u_aname = ""
+  const u_aphone = ""
 
   var SQL = sprintf(
     'INSERT INTO basic VALUES("%s", "%s", "%s","%s","%s","%s","%s");',
