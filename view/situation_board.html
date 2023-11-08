@@ -1,6 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script>
+      function loadProfile() {
+        fetch("/profile")
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("username").innerText = data.username;
+            document.getElementById("address").innerText = data.address;
+          })
+          .catch((error) => console.error("Error loading profile:", error));
+      }
+
+      // 페이지 로드 시 loadProfile 함수 호출
+      document.addEventListener("DOMContentLoaded", loadProfile);
+      // 편집 토글 기능
+      function toggleEdit() {
+        var username = document.getElementById("username");
+        var address = document.getElementById("address");
+        var editButton = document.getElementById("editButton");
+
+        // '편집' 상태인지 확인
+        if (editButton.innerText === "편집") {
+          // 편집 상태로 만들기
+          username.innerHTML =
+            '<input type="text" id="usernameInput" value="' +
+            username.innerText +
+            '">';
+          address.innerHTML =
+            '<input type="text" id="addressInput" value="' +
+            address.innerText +
+            '">';
+          editButton.innerText = "저장";
+        } else {
+          // 서버로 데이터 전송
+          var usernameInput = document.getElementById("usernameInput").value;
+          var addressInput = document.getElementById("addressInput").value;
+
+          username.innerText = usernameInput;
+          address.innerText = addressInput;
+          editButton.innerText = "편집";
+
+          // 아래 AJAX 요청은 서버의 '/update-profile' 엔드포인트에 데이터를 전송합니다.
+          // 이 부분은 서버 설정과 데이터베이스 연결이 필요합니다.
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", "/update-profile", true);
+          xhr.setRequestHeader("Content-Type", "application/json");
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+              console.log("Data saved successfully");
+              // 여기에 데이터가 성공적으로 저장되었음을 알리는 코드를 추가할 수 있습니다.
+            }
+          };
+          var data = JSON.stringify({
+            username: usernameInput,
+            address: addressInput,
+          });
+          xhr.send(data);
+        }
+      }
+    </script>
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -83,8 +142,8 @@
             <div class="card h-100">
               <!-- Product image-->
               <div class="card-text">
-                <h2>사용자 이름</h2>
-                <p>주소가 들어갈 공간</p>
+                <h2 id="username">사용자 이름</h2>
+                <p id="address">주소가 들어갈 공간</p>
               </div>
               <!-- Product details-->
               <div class="card-body p-4">
@@ -127,7 +186,13 @@
               <!-- Product actions-->
               <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                 <div class="text-center">
-                  <a class="btn btn-outline-dark mt-auto" href="#">편집</a>
+                  <button
+                    class="btn btn-outline-dark mt-auto"
+                    id="editButton"
+                    onclick="toggleEdit()"
+                  >
+                    편집
+                  </button>
                 </div>
               </div>
             </div>
@@ -136,8 +201,8 @@
             <div class="card h-100">
               <!-- Sale badge-->
               <!-- Product image-->
-              <h2>사용자 이름</h2>
-              <p>대전 엄복동 자전거</p>
+              <h2 id="username">사용자 이름</h2>
+              <p id="address">주소가 들어갈 공간</p>
               <!-- Product details-->
               <div class="card-body p-4">
                 <div class="text-center">

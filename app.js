@@ -6,6 +6,32 @@ const bodyParser = require("body-parser"); // 미들웨어 모듈
 const maria = require("./DB/maria"); //DB연결모듈
 const port = 3123; // 포트번호
 //#endregion
+// 데이터베이스 대신 메모리에 임시로 저장할 객체
+let profile = {
+  username: "초기 사용자 이름",
+  address: "초기 주소",
+};
+
+// bodyParser 미들웨어를 사용하여 JSON 요청 본문을 파싱합니다.
+app.use(bodyParser.json());
+
+// 프로필 데이터를 가져오는 라우트
+app.get("/profile", (req, res) => {
+  res.json(profile);
+});
+
+// 프로필 데이터를 업데이트하는 라우트
+app.post("/update-profile", (req, res) => {
+  const { username, address } = req.body;
+  profile.username = username;
+  profile.address = address;
+  res.send({ message: "프로필이 성공적으로 업데이트되었습니다." });
+});
+
+// 서버 시작
+app.listen(port, () => {
+  console.log(`Server listening at http://localhost:${3123}`);
+});
 
 //#region 파이썬 함수 호출
 const { spawn } = require("node:child_process");
@@ -30,8 +56,7 @@ app.use(bodyParser.text());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/situation_board", (req, res) => {
-  // 절대 경로를 사용하여 파일을 직접 제공합니다.
-  res.sendFile("C:/Users/user/Downloads/sv3/WSU/view/situation_board.html");
+  res.sendFile(__dirname + "/view/situation_board.html");
 });
 
 //#endregion
@@ -99,16 +124,16 @@ app.post("/sign_in", function (req, res) {
 
   var SQL = sprintf("Select id from member where id = '%s'", u_id);
 
-    maria.query(SQL, function (err, rows, fields) {
-      if (!err && rows.length > 0) {
-        // 로그인이 성공하면 situation_board.html 페이지로 리다이렉션
-        res.redirect("/situation_board");
-      } else {
-        // 로그인 실패시 실패 메시지 전송
-        res.send("로그인 실패..");
-        console.log("[DB] INSERT ERROR!");
-      }
-    });
+  maria.query(SQL, function (err, rows, fields) {
+    if (!err && rows.length > 0) {
+      // 로그인이 성공하면 situation_board.html 페이지로 리다이렉션
+      res.redirect("/situation_board");
+    } else {
+      // 로그인 실패시 실패 메시지 전송
+      res.send("로그인 실패..");
+      console.log("[DB] INSERT ERROR!");
+    }
+  });
 });
 
 app.listen(port, () => {
