@@ -99,10 +99,6 @@ app.post("/sign_in", function (req, res) {
 
   var SQL = sprintf("Select id from member where id = '%s'", u_id);
 
-  if (u_id == "admin" && u_pw == "admin") {
-    // 관리자 로그인이면 관리자 페이지로 리다이렉션
-    res.redirect("/admin_page_path");
-  } else {
     maria.query(SQL, function (err, rows, fields) {
       if (!err && rows.length > 0) {
         // 로그인이 성공하면 situation_board.html 페이지로 리다이렉션
@@ -113,7 +109,6 @@ app.post("/sign_in", function (req, res) {
         console.log("[DB] INSERT ERROR!");
       }
     });
-  }
 });
 
 app.listen(port, () => {
