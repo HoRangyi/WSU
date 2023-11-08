@@ -97,21 +97,13 @@ app.post("/sign_in", function (req, res) {
     var u_id = req.body.id;
     var u_pw = req.body.password;
 
-    if (u_id == "admin" && u_pw == "admin") {
-      res.send("어드민계정");
-    } else {
-      maria.query(SQL, function (err, rows, fields) {
-        if (!err) {
-          // 로그인 성공 시, HTML 파일을 클라이언트에게 보냅니다.
-          res.sendFile(
-            "C:/Users/user/Downloads/sv3/WSU/view/situation board.html"
-          );
-        } else {
-          res.send("로그인 실패..");
-          console.log("[DB] INSERT ERROR!");
-        }
-      });
-    }
+    maria.query(SQL, function (err, rows, fields) {
+      if (!err) {
+      } else {
+        res.send("로그인 실패..");
+        console.log("[DB] INSERT ERROR!");
+      }
+    });
   });
 });
 
