@@ -91,22 +91,18 @@ app.post("/sign_up", function (req, res) {
 //#endregion
 app.post("/sign_in", function (req, res) {
   const u_id = req.body.user_id;
-  const u_pw = req.body.user_pw;
+  //const u_pw = req.body.user_pw;
 
-  var SQL = sprintf("Select id from emtest where id = %s", u_id);
+  var SQL = sprintf("Select id from member where id = '%s'", u_id);
 
-  if (u_id == "admin" && u_pw == "admin") {
-    res.send("어드민계정");
-  } else {
     maria.query(SQL, function (err, rows, fields) {
       if (!err) {
-        res.send("로그인 성공!");
+          res.render("/view/situation_board.html")
       } else {
         res.send("로그인 실패..");
         console.log("[DB] INSERT ERROR!");
       }
     });
-  }
 });
 
 app.listen(port, () => {
