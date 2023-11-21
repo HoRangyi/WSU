@@ -28,11 +28,6 @@ app.post("/update-profile", (req, res) => {
   res.send({ message: "프로필이 성공적으로 업데이트되었습니다." });
 });
 
-// 서버 시작
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${3123}`);
-});
-
 //#region 파이썬 함수 호출
 const { spawn } = require("node:child_process");
 const { title } = require("node:process");
@@ -65,23 +60,6 @@ app.get("/situation_board", (req, res) => {
 app.get("/", (req, res) => {
   res.render("index", { title: "express" });
 });
-
-//#region 상황판
-// //while
-//     setInterval(function() {
-//       var SQL = sprintf(
-//         'Select * from '
-//         )
-//         maria.query(SQL, function (err, rows, fields){
-//           if(!err){
-//             // 여기에 html에 값 보내야됨
-//           }else{
-//             res.send("")
-//           }
-//         })
-//     }, 100)
-
-//#endregion
 
 // DB 라인
 //#region 사용자 등록
@@ -135,6 +113,39 @@ app.post("/sign_in", function (req, res) {
     }
   });
 });
+
+app.post("/image_on", function(req, res) {
+  
+  var SQL = sprintf("Select * from ai")
+  
+  maria.query(SQL, function(err, rows, fields) {
+
+    if(!err && rows.length > 0){
+      var arr = [];
+      var arr2 = [];
+      var num = 0
+      for(const row of rows){
+        //arr[num] = row.Sirial
+        arr2[num] = row.Disaster
+        //console.log(arr[num])
+        console.log(arr2[num])
+        num++
+      }
+      var imageElement = document.getElementById('fire_image_test');
+     
+      if(imageElement){
+        imageElement.src = "불남.jpg";
+        imageElement.alt = "New Image"
+    } else {
+        console.error("이미지찾을수없음")
+    }
+    }
+    else{
+      console.log(err)
+    }
+  })
+  
+})
 
 app.listen(port, () => {
   console.log("3123 포트에 로컬로 서버가열렸어요!");
