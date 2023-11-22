@@ -5,6 +5,7 @@ const sprintf = require("sprintf-js").sprintf; // sprintf 사용모듈
 const bodyParser = require("body-parser"); // 미들웨어 모듈
 const maria = require("./DB/maria"); //DB연결모듈
 const port = 3123; // 포트번호
+const fs = require("fs")
 //#endregion
 // 데이터베이스 대신 메모리에 임시로 저장할 객체
 let profile = {
@@ -114,31 +115,25 @@ app.post("/sign_in", function (req, res) {
   });
 });
 
-app.post("/image_on", function(req, res) {
+app.get("/fire_img", function(req, res) {
   
   var SQL = sprintf("Select * from ai")
   
   maria.query(SQL, function(err, rows, fields) {
-
     if(!err && rows.length > 0){
-      var arr = [];
-      var arr2 = [];
+      var arr = []
       var num = 0
       for(const row of rows){
-        //arr[num] = row.Sirial
-        arr2[num] = row.Disaster
-        //console.log(arr[num])
-        console.log(arr2[num])
+        arr[num] = row.Disaster
+        console.log(arr[num])
         num++
       }
-      var imageElement = document.getElementById('fire_image_test');
-     
-      if(imageElement){
-        imageElement.src = "불남.jpg";
-        imageElement.alt = "New Image"
-    } else {
-        console.error("이미지찾을수없음")
-    }
+      var newImageSrc = "불남.jpg"
+
+      fs.readFile("./view/불남.jpg", function(err, data){
+        res.writeHead(200, {'Context-Type':'text/html'})
+        res.end(data)
+      })
     }
     else{
       console.log(err)
