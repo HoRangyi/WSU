@@ -95,7 +95,7 @@ function fire(callback) {
 
       var newImageSrc = "";
 
-      console.log(arr[num-1])
+      console.log(arr[num - 1])
 
       if (arr[num - 1] == 0) {
         newImageSrc = "0.png";
@@ -103,18 +103,8 @@ function fire(callback) {
         newImageSrc = "1.png";
       }
 
-      var UpdateImageSrc = sprintf("./view/%s", newImageSrc);
-
-      fs.readFile(UpdateImageSrc, function (err, data) {
-        if (err) {
-          console.error(err);
-          callback(err, null);
-        } else {
-          // 데이터를 콜백으로 전달
-          callback(null, data);
-          console.log(data)
-        }
-      });
+      // 이미지 파일 경로를 콜백으로 전달
+      callback(null, newImageSrc);
     } else {
       console.log(err);
       callback(err, null);
