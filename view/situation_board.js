@@ -89,6 +89,9 @@ function loadProfile() {
 }
 
 function addNewProfile() {
+  // 새로운 사용자 ID 생성 (임시로 사용하는 예제 ID)
+  var newUserId = Date.now(); // 예시용: 현재 타임스탬프를 사용
+
   // 입력된 값들을 가져옵니다.
   var name = document.getElementById("newName").value;
   var address = document.getElementById("newAddress").value;
@@ -99,12 +102,19 @@ function addNewProfile() {
   var cardHtml = `
     <div class="col mb-5">
       <div class="card h-100">
-        <!-- Card Content Here -->
         <div class="card-body">
-          <h5 class="card-title">${name}</h5>
-          <p class="card-text">${address}</p>
-          <p class="card-text">${serial}</p>
-          <p class="card-text">${phone}</p>
+          <h5 class="card-title" id="username${newUserId}">${name}</h5>
+          <p class="card-text" id="address${newUserId}">${address}</p>
+          <p class="card-text" id="serial${newUserId}">${serial}</p>
+          <p class="card-text" id="phone${newUserId}">${phone}</p>
+          <img src="0.png" alt="Profile Image" style="width: 100%; height: auto;">
+        </div>
+        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+          <div class="text-center">
+            <button class="btn btn-outline-dark mt-auto" data-userid="${newUserId}" onclick="toggleEdit(this)">
+              편집
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -115,7 +125,11 @@ function addNewProfile() {
   container.insertAdjacentHTML("beforeend", cardHtml);
 
   // 모달을 닫고 입력 필드를 초기화합니다.
-  $("#addProfileModal").modal("hide");
+  var myModalEl = document.getElementById("addProfileModal");
+  var modal = bootstrap.Modal.getInstance(myModalEl);
+  modal.hide();
+
+  // 입력 필드 초기화
   document.getElementById("newName").value = "";
   document.getElementById("newAddress").value = "";
   document.getElementById("newSerial").value = "";
