@@ -6,6 +6,13 @@ const bodyParser = require("body-parser"); // 미들웨어 모듈
 const maria = require("./DB/maria"); //DB연결모듈
 const port = 3123; // 포트번호
 const fs = require("fs")
+
+const server = app.listen(port, () => {
+  console.log("3123 포트에 로컬로 서버가열렸어요!");
+});
+
+const io = require("socket.io")(server)
+
 //#endregion
 // 데이터베이스 대신 메모리에 임시로 저장할 객체
 let profile = {
@@ -54,6 +61,66 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/situation_board", (req, res) => {
   res.sendFile(__dirname + "/view/situation_board.html");
 });
+
+//#endregion
+
+//#region socket
+io.on('connection', (socket) => {
+  setInterval(() => {
+    fire((err, data) => {
+      if (err) {
+        console.error(err);
+      } else {
+        io.emit('image_path_1', data);
+      }
+    });
+  }, 1000);
+
+  socket.on('disconnect', () => {
+    console.log('연결종료');
+  });
+});
+
+function fire(callback) {
+  var SQL = sprintf("Select * from ai");
+
+  maria.query(SQL, function (err, rows, fields) {
+    if (!err && rows.length > 0) {
+      var arr = [];
+      var num = 0;
+      for (const row of rows) {
+        arr[num] = row.Disaster;
+        num++;
+      }
+
+      var newImageSrc = "";
+
+      console.log(arr[num-1])
+
+      if (arr[num - 1] == 0) {
+        newImageSrc = "0.png";
+      } else if (arr[num - 1] == 1) {
+        newImageSrc = "1.png";
+      }
+
+      var UpdateImageSrc = sprintf("./view/%s", newImageSrc);
+
+      fs.readFile(UpdateImageSrc, function (err, data) {
+        if (err) {
+          console.error(err);
+          callback(err, null);
+        } else {
+          // 데이터를 콜백으로 전달
+          callback(null, data);
+          console.log(data)
+        }
+      });
+    } else {
+      console.log(err);
+      callback(err, null);
+    }
+  });
+}
 
 //#endregion
 
@@ -115,33 +182,5 @@ app.post("/sign_in", function (req, res) {
   });
 });
 
-app.get("/fire_img", function(req, res) {
-  
-  var SQL = sprintf("Select * from ai")
-  
-  maria.query(SQL, function(err, rows, fields) {
-    if(!err && rows.length > 0){
-      var arr = []
-      var num = 0
-      for(const row of rows){
-        arr[num] = row.Disaster
-        console.log(arr[num])
-        num++
-      }
-      var newImageSrc = "불남.jpg"
 
-      fs.readFile("./view/불남.jpg", function(err, data){
-        res.writeHead(200, {'Context-Type':'text/html'})
-        res.end(data)
-      })
-    }
-    else{
-      console.log(err)
-    }
-  })
-  
-})
 
-app.listen(port, () => {
-  console.log("3123 포트에 로컬로 서버가열렸어요!");
-});

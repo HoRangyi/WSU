@@ -168,11 +168,19 @@
                 <div class="text-center">
                   <!-- Product name-->
                   <img
+                    id="image_path_1"
                     src="0.png"
                     alt="Small Image"
                     style="float: none; margin-right: 10px"
                     />
-                  <!-- Product price-->
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+                    <script>
+                      const socket = io();
+                      socket.on('image_path_1', (newImagePath) =>{
+                        document.getElementById('image_path_1').src = newImagePath
+                      })
+                    </script>
+                    <!-- Product price-->
                 </div>
               </div>
               <!-- Product actions-->
