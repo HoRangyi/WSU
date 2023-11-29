@@ -168,36 +168,10 @@
                 <div class="text-center">
                   <!-- Product name-->
                   <img
-                    src="fire_icon_138608.png"
+                    src="0.png"
                     alt="Small Image"
                     style="float: none; margin-right: 10px"
-                  />
-                  <img
-                    src="지진안함.png"
-                    alt="Small Image"
-                    style="float: right; margin-right: 10px"
-                  />
-                  <img
-                    src="nomal_human.png"
-                    alt="Small Image"
-                    style="float: left; margin-right: 10px"
-                  />
-
-                  <img
-                    src="불남.jpg"
-                    alt="Small Image"
-                    style="float: none; margin-right: 10px"
-                  />
-                  <img
-                    src="지진남.jpeg"
-                    alt="Small Image"
-                    style="float: right; margin-right: 10px"
-                  />
-                  <img
-                    src="red human.png"
-                    alt="Small Image"
-                    style="float: left; margin-right: 10px"
-                  />
+                    />
                   <!-- Product price-->
                 </div>
               </div>
@@ -227,36 +201,10 @@
                 <div class="text-center">
                   <!-- Product name-->
                   <img
-                    src="fire_icon_138608.png"
+                    src="0.png"
                     alt="Small Image"
                     style="float: none; margin-right: 10px"
-                  />
-                  <img
-                    src="지진안함.png"
-                    alt="Small Image"
-                    style="float: right; margin-right: 10px"
-                  />
-                  <img
-                    src="nomal_human.png"
-                    alt="Small Image"
-                    style="float: left; margin-right: 10px"
-                  />
-
-                  <img
-                    src="불남.jpg"
-                    alt="Small Image"
-                    style="float: none; margin-right: 10px"
-                  />
-                  <img
-                    src="지진남.jpeg"
-                    alt="Small Image"
-                    style="float: right; margin-right: 10px"
-                  />
-                  <img
-                    src="red human.png"
-                    alt="Small Image"
-                    style="float: left; margin-right: 10px"
-                  />
+                    />
                   <!-- Product price-->
                 </div>
               </div>
@@ -288,36 +236,10 @@
                 <div class="text-center">
                   <!-- Product name-->
                   <img
-                    src="fire_icon_138608.png"
+                    src="0.png"
                     alt="Small Image"
                     style="float: none; margin-right: 10px"
-                  />
-                  <img
-                    src="지진안함.png"
-                    alt="Small Image"
-                    style="float: right; margin-right: 10px"
-                  />
-                  <img
-                    src="nomal_human.png"
-                    alt="Small Image"
-                    style="float: left; margin-right: 10px"
-                  />
-
-                  <img
-                    src="불남.jpg"
-                    alt="Small Image"
-                    style="float: none; margin-right: 10px"
-                  />
-                  <img
-                    src="지진남.jpeg"
-                    alt="Small Image"
-                    style="float: right; margin-right: 10px"
-                  />
-                  <img
-                    src="red human.png"
-                    alt="Small Image"
-                    style="float: left; margin-right: 10px"
-                  />
+                    />
                   <!-- Product price-->
                 </div>
               </div>
@@ -345,6 +267,11 @@
               <div class="card-body p-4">
                 <div class="text-center">
                   <!-- Product name-->
+                  <img
+                    src="0.png"
+                    alt="Small Image"
+                    style="float: none; margin-right: 10px"
+                    />
                   <h5 class="fw-bolder"></h5>
                   <!-- Product reviews-->
                   <div
@@ -374,6 +301,11 @@
                 <p id="phone5">전화번호가 들어갈 공간</p>
               </div>
               <!-- Product details-->
+              <img
+                    src="0.png"
+                    alt="Small Image"
+                    style="float: none; margin-right: 10px"
+                    />
               <div class="card-body p-4">
                 <div class="text-center">
                   <!-- Product name-->
@@ -397,6 +329,54 @@
             </div>
           </div>
           
+
+  <!-- 추가 버튼 -->
+  <div class="text-center mt-4">
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProfileModal">프로필 추가</button>
+  </div>
+
+<!-- Modal for Adding New Profile -->
+<div class="modal fade" id="addProfileModal" tabindex="-1" aria-labelledby="addProfileModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addProfileModalLabel">새 프로필 추가</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="newName" class="form-label">이름</label>
+            <input type="text" class="form-control" id="newName">
+          </div>
+          <div class="mb-3">
+            <label for="newAddress" class="form-label">주소</label>
+            <input type="text" class="form-control" id="newAddress">
+          </div>
+          <div class="mb-3">
+            <label for="newSerial" class="form-label">시리얼 번호</label>
+            <input type="text" class="form-control" id="newSerial">
+          </div>
+          <div class="mb-3">
+            <label for="newPhone" class="form-label">전화번호</label>
+            <input type="tel" class="form-control" id="newPhone">
+          </div>
+          <img
+                    src="0.png"
+                    alt="Small Image"
+                    style="float: none; margin-right: 10px"
+                    />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-primary" onclick="addNewProfile()">추가</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
           <!-- Modal Dialog -->
           <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -424,6 +404,11 @@
                       <label for="phoneInputModal" class="form-label">핸드폰 번호</label>
                       <input type="tel" class="form-control" id="phoneInputModal">
                     </div>
+                    <img
+                    src="0.png"
+                    alt="Small Image"
+                    style="float: none; margin-right: 10px"
+                    />
                   </form>
                 </div>
                 <div class="modal-footer">

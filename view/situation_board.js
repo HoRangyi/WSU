@@ -88,5 +88,39 @@ function loadProfile() {
   // 해당 부분은 구현되어 있지 않으므로 구현이 필요합니다.
 }
 
+function addNewProfile() {
+  // 입력된 값들을 가져옵니다.
+  var name = document.getElementById("newName").value;
+  var address = document.getElementById("newAddress").value;
+  var serial = document.getElementById("newSerial").value;
+  var phone = document.getElementById("newPhone").value;
+
+  // 새 프로필 카드 HTML을 생성합니다.
+  var cardHtml = `
+    <div class="col mb-5">
+      <div class="card h-100">
+        <!-- Card Content Here -->
+        <div class="card-body">
+          <h5 class="card-title">${name}</h5>
+          <p class="card-text">${address}</p>
+          <p class="card-text">${serial}</p>
+          <p class="card-text">${phone}</p>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // 새 카드를 페이지에 추가합니다.
+  var container = document.querySelector(".row");
+  container.insertAdjacentHTML("beforeend", cardHtml);
+
+  // 모달을 닫고 입력 필드를 초기화합니다.
+  $("#addProfileModal").modal("hide");
+  document.getElementById("newName").value = "";
+  document.getElementById("newAddress").value = "";
+  document.getElementById("newSerial").value = "";
+  document.getElementById("newPhone").value = "";
+}
+
 // 페이지가 완전히 로드될 때 loadProfile 함수를 호출합니다.
 document.addEventListener("DOMContentLoaded", loadProfile);
