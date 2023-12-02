@@ -67,11 +67,18 @@ app.get("/situation_board", (req, res) => {
 //#region socket
 io.on('connection', (socket) => {
   setInterval(() => {
-    fire((err, data) => {
+    image_path((err, data) => {
       if (err) {
         console.error(err);
       } else {
-        io.emit('image_path_1', data);
+        for(var i = 0; i <= src_num.length; i++)
+        {
+          var src_num = ["0", "1", "2", "3"]
+          var src_link = sprintf("image_path_%s", src_num[num])
+          io.emit('image_path_1', data);
+        }
+        
+        
       }
     });
   }, 1000);
@@ -81,33 +88,43 @@ io.on('connection', (socket) => {
   });
 });
 
-function fire(callback) {
+function image_path(callback) {
   var SQL = sprintf("Select * from ai");
 
   maria.query(SQL, function (err, rows, fields) {
     if (!err && rows.length > 0) {
-      var arr = [];
+      var serials = [];
+      var disasters = [];
       var num = 0;
       for (const row of rows) {
-        arr[num] = row.Disaster;
-        num++;
+        serials[num] = row.Sirial;
+        disasters[num] = row.Disaster;
+       
+        var newImageSrc = "";  
+      
+        if (disasters[num] == 0) {
+          newImageSrc = "0.png";
+        } else if (disasters[num] == 1) {
+          newImageSrc = "1.png";
+        } else if (disasters[num] == 2) {
+          newImageSrc = "2.png";
+        } else if (disasters[num] == 3) {
+          newImageSrc = "3.png";
+        } else if (disasters[num] == 4) {
+          newImageSrc = "4.png";
+        } else if (disasters[num] == 5) {
+          newImageSrc = "5.png";
+        } else if (disasters[num] == 6) {
+          newImageSrc = "6.png";
+        } else if (disasters[num] == 7) {
+          newImageSrc = "7.png";
+        }
+  
+        // 이미지 파일 경로를 콜백으로 전달
+        callback(null, newImageSrc); 
       }
 
-      var newImageSrc = "";
-
-      console.log(arr[num - 1])
-
-      if (arr[num - 1] == 0) {
-        newImageSrc = "0.png";
-      } else if (arr[num - 1] == 1) {
-        newImageSrc = "1.png";
-      }
-
-      // 이미지 파일 경로를 콜백으로 전달
-      callback(null, newImageSrc);
-    } else {
-      console.log(err);
-      callback(err, null);
+      num++;
     }
   });
 }
