@@ -68,81 +68,147 @@ io.on('connection', (socket) => {
 
 var imagePaths = [];
 var serials = [];
+var member = [];
 
-function updateValues() {
-  image_path((err, data) => {
-    if (err) {
-      console.error(err);
-    } else {
-        imagePaths.push(data);
-        io.emit('image_path_1', imagePaths[0]);
-        io.emit('image_path_2', imagePaths[1]);
-        imagePaths = [data]; // 배열안에 data.length 이상 속성이있으면 초기화
-    }
-  });
-  serial_path((err, data) => {
-    if (err) {
-      console.error(err);
-    } else {
-      serials = data;
-      io.emit('serial_path_1', serials[0]);
-      io.emit('serial_path_2', serials[1]);
-      serials = [data]    // 배열안에 data.length 이상 속성이있으면 초기화
-    }
-  });
-}
+async function getImageData() {
+  return new Promise((resolve, reject) => {
+    var SQL = sprintf("Select * from ai");
 
-function image_path(callback) {
-  var SQL = sprintf("Select * from ai");
+    maria.query(SQL, function (err, rows, fields) {
+      if (err) {
+        reject(err);
+      } else if (rows.length > 0) {
+        var disasters = [];
+        var imagePaths = [];
 
-  maria.query(SQL, function (err, rows, fields) {
-    if (!err && rows.length > 0) {
-      var disasters = [];
-      var num = 0;
-      for (const row of rows) {
-        disasters[num] = row.Disaster;
-       
-        var newImageSrc = "";
+        for (const row of rows) {
+          disasters.push(row.Disaster);
 
-        if (disasters[num] == 0) {
-          newImageSrc = "0.png";
-        } else if (disasters[num] == 1) {
-          newImageSrc = "1.png";
-          Disaster_s(disasters[num])
-        } else if (disasters[num] == 2) {
-          newImageSrc = "2.png";
-        } else if (disasters[num] == 3) {
-          newImageSrc = "3.png";
-        } else if (disasters[num] == 4) {
-          newImageSrc = "4.png";
-        } else if (disasters[num] == 5) {
-          newImageSrc = "5.png";
-        } else if (disasters[num] == 6) {
-          newImageSrc = "6.png";
-        } else if (disasters[num] == 7) {
-          newImageSrc = "7.png";
+          var newImageSrc = "";
+
+          switch (disasters[disasters.length - 1]) {
+            // 이미지 파일 경로를 생성
+            case 0:
+              newImageSrc = "0.png";
+              break;
+            case 1:
+              newImageSrc = "1.png";
+              Disaster_s(disasters[disasters.length - 1]);
+              break;
+            case 2:
+              newImageSrc = "2.png";
+              break;
+            case 3:
+              newImageSrc = "3.png";
+              break;
+            case 4:
+              newImageSrc = "4.png";
+              break;
+            case 5:
+              newImageSrc = "5.png";
+              break;
+            case 6:
+              newImageSrc = "6.png";
+              break;
+            case 7:
+              newImageSrc = "7.png";
+              break;
+            default:
+              // 다른 경우에 대한 처리를 추가할 수 있습니다.
+              break;
+          }
+
+          imagePaths.push(newImageSrc);
         }
-        // 이미지 파일 경로를 콜백으로 전달
-        callback(null, newImageSrc); 
+
+        resolve(imagePaths);
+      } else {
+        resolve([]); // 데이터가 없을 경우 빈 배열 반환
       }
-      num++;
-    }
+    });
   });
 }
 
+async function updateValues() {
+  try {
+    const imageData = await getImageData();
+    const serialData = await getSerialData();
+    const MemberData = await getMemberData();
 
-function serial_path(callback) {
-  var SQL = sprintf("Select * from ai");
-
-  maria.query(SQL, function (err, rows, fields) {
-    if (!err && rows.length > 0) {
-      var serials = [];
-      for (const row of rows) {
-        serials.push(row.Sirial);
-      }
-      // 시리얼 값을 배열 전체로 콜백으로 전달
-      callback(null, serials);
+    
+    // 이미지 데이터 처리
+    imagePaths = imageData.slice(-8);
+    for (let i = 0; i < imagePaths.length; i++) {
+      io.emit(`image_path_${i + 1}`, imagePaths[i]);
     }
+
+    // 시리얼 데이터 처리
+    serials = serialData.slice(-8);
+    for (let i = 0; i < serials.length; i++) {
+      io.emit(`serial_path_${i + 1}`, serials[i]);
+    }
+
+    // Member 데이터 처리
+    for (let i = 0; i < MemberData.length; i++) {
+      const currentMember = MemberData[i];
+      const name = currentMember.name;
+      const addr = currentMember.addr;
+      const phone = currentMember.phone;
+
+      io.emit(`name_path_${i + 1}`, name);
+      io.emit(`addr_path_${i + 1}`, addr);
+      io.emit(`phone_path_${i + 1}`, phone);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function getSerialData() {
+  return new Promise((resolve, reject) => {
+    var SQL = sprintf("Select * from ai");
+
+    maria.query(SQL, function (err, rows, fields) {
+      if (err) {
+        reject(err);
+      } else if (rows.length > 0) {
+        var serials = [];
+        for (const row of rows) {
+          serials.push(row.Sirial);
+        }
+        resolve(serials);
+      } else {
+        resolve([]); // 데이터가 없을 경우 빈 배열 반환
+      }
+    });
+  });
+}
+
+async function getMemberData() {
+  return new Promise((resolve, reject) => {
+    var SQL = sprintf("Select * from member");
+
+    maria.query(SQL, function (err, rows, fields) {
+      if (err) {
+        reject(err);
+      } else if (rows.length > 0) {
+        var members = [];
+        
+        for (const row of rows) {
+          members.push({
+            name: row.NAME,
+            addr: row.ADDR,
+            phone: row.Phone
+          });
+        //  console.log(row.NAME)
+        //  console.log(row.ADDR)
+        //  console.log(row.Phone)
+        }
+        resolve(members); // 데이터를 resolve 함수로 전달
+      } else {
+        resolve([]); // 데이터가 없을 경우 빈 배열 반환
+      }
+    });
   });
 }
 //#endregion
@@ -196,6 +262,4 @@ app.post("/sign_in", function (req, res) {
     }
   });
 });
-
-
 
