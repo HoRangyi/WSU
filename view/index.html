@@ -1,77 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>로그인</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f0f0f0;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그인</title>
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
 
-    form {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+      form {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
 
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-    }
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+      }
 
-    input {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 16px;
-      box-sizing: border-box;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
+      input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 16px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
 
-    input[type="submit"], input[type="button"] {
-      background-color: #4caf50;
-      color: #fff;
-      cursor: pointer;
-      border: none;
-      padding: 10px;
-      border-radius: 4px;
-    }
+      input[type="submit"] {
+        background-color: #4caf50;
+        color: #fff;
+        cursor: pointer;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        width: 80px;
+      }
 
-    input[type="submit"]:hover, input[type="button"]:hover {
-      background-color: #45a049;
-    }
-  </style>
-</head>
-<body>
-  <form action="/sign_in" method="post">
-    <label for="user_id">ID</label>
-    <input type="text" id="user_id" name="user_id" />
-    <br />
-    <label for="user_pw">PW</label>
-    <input type="text" id="user_pw" name="user_pw" />
-    <br />
-    <br />
-    <div style="display: flex; justify-content: space-between;">
-      <input type="submit" value="로그인" />
-      <input type="button" value="회원가입 이동" onclick="window.location.href='signup.html'" />
-    </div>
-  </form>
- 
-<!-- 
+      input[type="button"]{
+        background-color: #4caf50;
+        color: #fff;
+        cursor: pointer;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        width: 80px;
+      }
+
+      input[type="submit"]:hover, input[type="button"]:hover {
+        background-color: #45a049;
+        e
+      }
+    </style>
+  </head>
+  <body>
+    <form action="/sign_in" method="post">
+      <label for="user_id">ID</label>
+      <input type="text" id="user_id" name="user_id" />
+      <br />
+      <label for="user_pw">PW</label>
+      <input type="text" id="user_pw" name="user_pw" />
+      <br />
+      <br />
+      <div style="display: flex; justify-content: space-between">
+        <input type="submit" value="로그인" />
+        <input
+          type="button"
+          value="회원가입"
+          onclick="window.location.href='signup.html'"
+        />
+      </div>
+    </form>
+
+    <!-- 
   <form action="situation_board.html" method="get">
     <input type="submit" value="상황판" />
      <form action="/message" method="post">
     <input type="submit" value="메세지테스트" />
   </form>
-  </form> --> 
-</body>
+  </form> -->
+  </body>
 </html>
