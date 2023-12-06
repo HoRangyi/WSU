@@ -168,10 +168,23 @@
                     />
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
                     <script>
-                      const socket = io();
-                      socket.on('image_path_1', (newImagePath) =>{
+                      const socket1 = io();
+                      socket1.on('image_path_1', (newImagePath) =>{
                         document.getElementById('image_path_1').src = newImagePath
                       })
+                      socket1.on('serial_path_1', (newTextPath) =>{
+                        document.getElementById('serial1').innerText = newTextPath
+                      })
+                      socket1.on('name_path_1', (newTextPath) =>{
+                        document.getElementById('username1').innerText = newTextPath
+                      })
+                      socket1.on('addr_path_1', (newTextPath) =>{
+                        document.getElementById('address1').innerText = newTextPath
+                      })
+                      socket1.on('phone_path_1', (newTextPath) =>{
+                        document.getElementById('phone1').innerText = newTextPath
+                      })
+                      
                     </script>
                     <!-- Product price-->
                 </div>
@@ -202,6 +215,7 @@
                 <div class="text-center">
                   <!-- Product name-->
                   <img
+                    id="image_path_2"
                     src="0.png"
                     alt="Small Image"
                     style="float: none; margin-right: 10px"
@@ -209,6 +223,25 @@
                   <!-- Product price-->
                 </div>
               </div>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+              <script>
+                const socket2 = io();
+                socket2.on('image_path_2', (newImagePath) =>{
+                  document.getElementById('image_path_2').src = newImagePath
+                })
+                socket2.on('serial_path_2', (newTextPath) =>{
+                  document.getElementById('serial2').innerText = newTextPath                
+                })
+                socket2.on('name_path_2', (newTextPath) =>{
+                  document.getElementById('username2').innerText = newTextPath
+                })
+                socket2.on('addr_path_2', (newTextPath) =>{
+                document.getElementById('address2').innerText = newTextPath
+                })
+                socket2.on('phone_path_2', (newTextPath) =>{
+                document.getElementById('phone2').innerText = newTextPath
+                })
+              </script>
               <!-- Product actions-->
               <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                 <div class="text-center">
@@ -237,6 +270,7 @@
                 <div class="text-center">
                   <!-- Product name-->
                   <img
+                    id="image_path_3"
                     src="0.png"
                     alt="Small Image"
                     style="float: none; margin-right: 10px"
@@ -244,6 +278,25 @@
                   <!-- Product price-->
                 </div>
               </div>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+              <script>
+                const socket3 = io();
+                socket3.on('image_path_3', (newImagePath) =>{
+                  document.getElementById('image_path_3').src = newImagePath
+                })
+                socket3.on('serial_path_3', (newTextPath) =>{
+                  document.getElementById('serial3').innerText = newTextPath
+                })
+                socket3.on('name_path_3', (newTextPath) =>{
+                  document.getElementById('username3').innerText = newTextPath
+                })
+                socket3.on('addr_path_3', (newTextPath) =>{
+                  document.getElementById('address3').innerText = newTextPath
+                })
+                 socket3.on('phone_path_3', (newTextPath) =>{
+                  document.getElementById('phone3').innerText = newTextPath
+                })
+              </script>
               <!-- Product actions-->
               <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                 <div class="text-center">
@@ -269,10 +322,30 @@
                 <div class="text-center">
                   <!-- Product name-->
                   <img
+                    id="image_path_4"
                     src="0.png"
                     alt="Small Image"
                     style="float: none; margin-right: 10px"
                     />
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+                  <script>
+                  const socket4 = io();
+                  socket4.on('image_path_4', (newImagePath) =>{
+                    document.getElementById('image_path_4').src = newImagePath
+                })
+                  socket4.on('serial_path_4', (newTextPath) =>{
+                    document.getElementById('serial4').innerText = newTextPath
+                })
+                  socket4.on('name_path_4', (newTextPath) =>{
+                    document.getElementById('username4').innerText = newTextPath
+                })
+                  socket4.on('addr_path_4', (newTextPath) =>{
+                    document.getElementById('address4').innerText = newTextPath
+                })
+                  socket4.on('phone_path_4', (newTextPath) =>{
+                  document.getElementById('phone4').innerText = newTextPath
+                })
+              </script>
                   <h5 class="fw-bolder"></h5>
                   <!-- Product reviews-->
                   <div
@@ -303,10 +376,30 @@
               </div>
               <!-- Product details-->
               <img
+                    id="image_path_5"
                     src="0.png"
                     alt="Small Image"
                     style="float: none; margin-right: 10px"
                     />
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+              <script>
+                const socket5 = io();
+                socket5.on('image_path_5', (newImagePath) =>{
+                  document.getElementById('image_path_5').src = newImagePath
+                })
+                socket5.on('serial_path_5', (newTextPath) =>{
+                  document.getElementById('serial5').innerText = newTextPath
+                })
+                socket5.on('name_path_5', (newTextPath) =>{
+                  document.getElementById('username5').innerText = newTextPath
+                })
+                socket5.on('addr_path_5', (newTextPath) =>{
+                  document.getElementById('address5').innerText = newTextPath
+                })
+                socket5.on('phone_path_5', (newTextPath) =>{
+                  document.getElementById('phone5').innerText = newTextPath
+                })
+              </script>
               <div class="card-body p-4">
                 <div class="text-center">
                   <!-- Product name-->
@@ -340,10 +433,30 @@
               </div>
               <!-- Product details-->
               <img
+                    id="image_path_6"
                     src="0.png"
                     alt="Small Image"
                     style="float: none; margin-right: 10px"
                     />
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+              <script>
+                const socket6 = io();
+                socket6.on('image_path_6', (newImagePath) =>{
+                  document.getElementById('image_path_6').src = newImagePath
+                })
+                socket6.on('serial_path_6', (newTextPath) =>{
+                  document.getElementById('serial6').innerText = newTextPath
+                })
+                socket6.on('name_path_6', (newTextPath) =>{
+                  document.getElementById('username6').innerText = newTextPath
+                })
+                socket6.on('addr_path_6', (newTextPath) =>{
+                  document.getElementById('address6').innerText = newTextPath
+                })
+                socket5.on('phone_path_6', (newTextPath) =>{
+                  document.getElementById('phone6').innerText = newTextPath 
+                })
+              </script>
               <div class="card-body p-4">
                 <div class="text-center">
                   <!-- Product name-->
@@ -377,10 +490,30 @@
               </div>
               <!-- Product details-->
               <img
+                    id="image_path_7"
                     src="0.png"
                     alt="Small Image"
                     style="float: none; margin-right: 10px"
                     />
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+                    <script>
+                      const socket7 = io();
+                      socket7.on('image_path_7', (newImagePath) =>{
+                        document.getElementById('image_path_7').src = newImagePath
+                      })
+                      socket7.on('serial_path_7', (newTextPath) =>{
+                        document.getElementById('serial7').innerText = newTextPath
+                      })
+                      socket7.on('name_path_7', (newTextPath) =>{
+                        document.getElementById('username7').innerText = newTextPath
+                      })
+                      socket7.on('addr_path_7', (newTextPath) =>{
+                        document.getElementById('address7').innerText = newTextPath
+                      })
+                      socket7.on('phone_path_7', (newTextPath) =>{
+                        document.getElementById('phone7').innerText = newTextPath
+                      })
+                    </script>
               <div class="card-body p-4">
                 <div class="text-center">
                   <!-- Product name-->
@@ -414,10 +547,30 @@
               </div>
               <!-- Product details-->
               <img
+                    id="image_path_8"
                     src="0.png"
                     alt="Small Image"
                     style="float: none; margin-right: 10px"
                     />
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+              <script>
+                const socket8 = io();
+                socket8.on('image_path_8', (newImagePath) =>{
+                  document.getElementById('image_path_8').src = newImagePath
+                })
+                socket8.on('serial_path_8', (newTextPath) =>{
+                  document.getElementById('serial8').innerText = newTextPath
+                })
+                socket8.on('name_path_8', (newTextPath) =>{
+                  document.getElementById('username8').innerText = newTextPath
+                })
+                socket8.on('addr_path_8', (newTextPath) =>{
+                  document.getElementById('address8').innerText = newTextPath
+                })
+                socket8.on('phone_path_8', (newTextPath) =>{
+                  document.getElementById('phone8').innerText = newTextPath
+                })
+              </script>
               <div class="card-body p-4">
                 <div class="text-center">
                   <!-- Product name-->
