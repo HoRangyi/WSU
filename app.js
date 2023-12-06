@@ -174,7 +174,7 @@ async function getSerialData() {
       } else if (rows.length > 0) {
         var serials = [];
         for (const row of rows) {
-          serials.push(row.Sirial);
+          serials.push(row.Serial);
         }
         resolve(serials);
       } else {
@@ -197,7 +197,7 @@ async function getMemberData() {
         for (const row of rows) {
           members.push({
             name: row.NAME,
-            addr: row.ADDR,
+            addr: row.Addr,
             phone: row.Phone
           });
         //  console.log(row.NAME)
@@ -227,13 +227,20 @@ app.post("/sign_up", function (req, res) {
   const u_addr = req.body.user_adr; // 유저 주소
   const u_phone = req.body.user_phone; //유저 전화번호
 
+  //'INSERT INTO member VALUES("","%s", "%s", "%s","%s","%s");',
+    // u_id,
+    // u_pw,
+    // u_name,
+    // u_addr,
+    // u_phone
+
   var SQL = sprintf(
-    'INSERT INTO member VALUES("","%s", "%s", "%s","%s","%s");',
-    u_id,
-    u_pw,
-    u_name,
-    u_addr,
-    u_phone
+    'update set member id = "%s", pw = "%s", name = "%s", phone = "%s" where = "%s";',
+     u_id,
+     u_pw,
+     u_name,
+     u_phone,
+     u_addr
   );
   maria.query(SQL, function (err, rows, fields) {
     if (!err) {
