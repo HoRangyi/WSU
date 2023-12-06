@@ -11158,4 +11158,13 @@ fieldset:disabled .btn {
   .d-print-none {
     display: none !important;
   }
+
+  .profile-section {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .profile-cards-container {
+    flex-grow: 1; /* 프로필 카드 영역이 확장 가능하도록 설정 */
+  }
 }

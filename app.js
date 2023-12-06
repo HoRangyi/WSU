@@ -5,13 +5,13 @@ const sprintf = require("sprintf-js").sprintf; // sprintf 사용모듈
 const bodyParser = require("body-parser"); // 미들웨어 모듈
 const maria = require("./DB/maria"); //DB연결모듈
 const port = 3123; // 포트번호
-const fs = require("fs")
+const fs = require("fs");
 
 const server = app.listen(port, () => {
   console.log("3123 포트에 로컬로 서버가열렸어요!");
 });
 
-const io = require("socket.io")(server)
+const io = require("socket.io")(server);
 
 //#endregion
 // 데이터베이스 대신 메모리에 임시로 저장할 객체
@@ -65,26 +65,17 @@ app.get("/situation_board", (req, res) => {
 //#endregion
 
 //#region socket
-io.on('connection', (socket) => {
+io.on("connection", (socket) => {
   setInterval(() => {
     image_path((err, data) => {
       if (err) {
         console.error(err);
-      } else {
-        for(var i = 0; i <= src_num.length; i++)
-        {
-          var src_num = ["0", "1", "2", "3"]
-          var src_link = sprintf("image_path_%s", src_num[num])
-          io.emit('image_path_1', data);
-        }
-        
-        
-      }
+      } else {}
     });
   }, 1000);
 
-  socket.on('disconnect', () => {
-    console.log('연결종료');
+  socket.on("disconnect", () => {
+    console.log("연결종료");
   });
 });
 
@@ -123,11 +114,6 @@ function image_path(callback) {
         // 이미지 파일 경로를 콜백으로 전달
         callback(null, newImageSrc); 
       }
-
-      num++;
-    }
-  });
-}
 
 //#endregion
 
@@ -188,6 +174,4 @@ app.post("/sign_in", function (req, res) {
     }
   });
 });
-
-
 
