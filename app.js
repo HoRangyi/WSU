@@ -235,7 +235,7 @@ app.post("/sign_up", function (req, res) {
     // u_phone
 
   var SQL = sprintf(
-    'update set member id = "%s", pw = "%s", name = "%s", phone = "%s" where = "%s";',
+    'update member set id = "%s", pw = "%s", name = "%s", phone = "%s" where addr = "%s";',
      u_id,
      u_pw,
      u_name,
